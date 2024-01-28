@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Input } from '@mui/material';
+import { FormControl, FormLabel, Input } from '@mui/material';
 import { useRecoilState } from 'recoil';
 import { lengthAtom } from './atom';
 
