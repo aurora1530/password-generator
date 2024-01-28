@@ -20,10 +20,10 @@ export default function App() {
               <GenButton />
             </OutlinedCard>
             <OutlinedCard>
-              <IncludeCharCheckBox />
+              <LengthInput />
             </OutlinedCard>
             <OutlinedCard>
-              <LengthInput />
+              <IncludeCharCheckBox />
             </OutlinedCard>
             <OutlinedCard>
               <ExcludeCharCheckBox />
