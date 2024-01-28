@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inconsolata } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material';
 import theme from './theme';
 
-const inter = Inter({ subsets: ['latin'] });
+const fnt = Inconsolata({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'password-generator',
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="js">
-      <body className={inter.className}>
+      <body className={fnt.className}>
         <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
       </body>
     </html>
