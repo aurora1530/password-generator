@@ -1,11 +1,11 @@
 'use client';
 
 import { Box } from '@mui/material';
-import UseCharCheckBox from './UseCharCheckBox';
+import IncludeCharCheckBox from './IncludeCharCheckBox';
 import GenButton from './GenButton';
 import { RecoilRoot } from 'recoil';
 import LengthInput from './LengthInput';
-import ExcludeCheckBox from './ExcludeCheckBox';
+import ExcludeCharCheckBox from './ExcludeCharCheckBox';
 import OptionsCard from './OptionCard';
 
 export default function App() {
@@ -17,13 +17,13 @@ export default function App() {
             <GenButton />
           </OptionsCard>
           <OptionsCard>
-            <UseCharCheckBox />
+            <IncludeCharCheckBox />
           </OptionsCard>
           <OptionsCard>
             <LengthInput />
           </OptionsCard>
           <OptionsCard>
-            <ExcludeCheckBox />
+            <ExcludeCharCheckBox />
           </OptionsCard>
         </Box>
       </RecoilRoot>

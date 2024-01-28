@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   includeCharactersAtom,
-  passwordLengthAtom,
+  lengthAtom,
   excludeMistakableCharactersAtom,
   charErrorAtom,
 } from './atom';
 
 export default function GenButton() {
-  const length = useRecoilValue(passwordLengthAtom);
+  const length = useRecoilValue(lengthAtom);
   const includeCharacters = useRecoilValue(includeCharactersAtom);
   const excludeMistakableCharacters = useRecoilValue(excludeMistakableCharactersAtom);
   const charError = useRecoilValue(charErrorAtom);
@@ -41,15 +41,17 @@ export default function GenButton() {
       <Button variant="outlined" onClick={handleClick} disabled={hasError}>
         GENERATE
       </Button>
-      <Input
-        value={password}
-        color="primary"
-        readOnly
-        inputProps={{ style: { textAlign: 'center' } }}
-      />
       <Button variant="outlined" onClick={handleCopy}>
         COPY
       </Button>
+      <div>
+        <Input
+          value={password}
+          color="primary"
+          readOnly
+          inputProps={{ style: { textAlign: 'center' } }}
+        />
+      </div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const passwordLengthAtom = atom({
+export const lengthAtom = atom({
   key: 'passwordLength',
   default: 10,
 });

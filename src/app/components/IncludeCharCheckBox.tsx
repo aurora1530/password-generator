@@ -5,28 +5,28 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
-  Input,
 } from '@mui/material';
 import { useRecoilState } from 'recoil';
 import { charErrorAtom, includeCharactersAtom } from './atom';
 
-export default function UseCharCheckBox() {
+export default function IncludeCharCheckBox() {
   const [includeCharacters, setIncludeCharacters] = useRecoilState(includeCharactersAtom);
   const [charError, setCharError] = useRecoilState(charErrorAtom);
   const { uppercase, lowercase, number, symbol } = includeCharacters;
+
   const handleCharChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCharacters = {
       ...includeCharacters,
       [event.target.name]: event.target.checked,
     };
-    setIncludeCharacters(newCharacters);
+    setIncludeCharacters((chars) => (chars = newCharacters));
     setCharError(() => Object.values(newCharacters).filter(Boolean).length === 0);
   };
 
   return (
     <>
       <FormControl required error={charError} variant="standard">
-        <FormLabel component="legend">使用する文字種</FormLabel>
+        <FormLabel>使用する文字種</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={

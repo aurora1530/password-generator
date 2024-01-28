@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Header from './components/Header';
 import { Box, Container } from '@mui/material';
-import UseCharCheckBox from './components/UseCharCheckBox';
+import IncludeCharCheckBox from './components/IncludeCharCheckBox';
 import App from './components/App';
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Header />
       <Container maxWidth="lg" className="bg-white">
-        <Box sx={{ height: '100vh' }}>
+        <Box sx={{ height: '90vh' }}>
           <App />
         </Box>
       </Container>
