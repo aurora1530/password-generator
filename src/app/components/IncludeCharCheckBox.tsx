@@ -60,9 +60,10 @@ export default function IncludeCharCheckBox() {
             name="symbol"
           />
         </FormGroup>
-        {charError && (
-          <FormHelperText>少なくとも1つの文字種を選択してください</FormHelperText>
-        )}
+
+        <FormHelperText style={{ color: charError ? '' : 'transparent' }}>
+          少なくとも1つの文字種を選択してください
+        </FormHelperText>
       </FormControl>
     </>
   );
