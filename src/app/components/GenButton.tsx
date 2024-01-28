@@ -26,8 +26,14 @@ export default function GenButton() {
     setPassword(pass);
   };
 
+  const [copyButtonText, setCopyButtonText] = useState('COPY');
   const handleCopy = () => {
-    navigator.clipboard.writeText(password);
+    navigator.clipboard.writeText(password).then(() => {
+      setCopyButtonText('COPIED!');
+      setTimeout(() => {
+        setCopyButtonText('COPY');
+      }, 1000);
+    });
   };
 
   // 初回レンダリング時にパスワードを生成する
@@ -42,7 +48,7 @@ export default function GenButton() {
         GENERATE
       </Button>
       <Button variant="outlined" onClick={handleCopy}>
-        COPY
+        {copyButtonText}
       </Button>
       <div>
         <Input
