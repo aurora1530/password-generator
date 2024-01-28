@@ -1,7 +1,7 @@
 import { Button, Input } from '@mui/material';
 import createPassword, { PasswordOptions } from 'password-generator';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import {
   includeCharactersAtom,
   lengthAtom,
@@ -10,21 +10,28 @@ import {
 } from './atom';
 
 export default function GenButton() {
-  const length = useRecoilValue(lengthAtom);
-  const includeCharacters = useRecoilValue(includeCharactersAtom);
-  const excludeMistakableCharacters = useRecoilValue(excludeMistakableCharactersAtom);
-  const charError = useRecoilValue(charErrorAtom);
+  const [length, setLength] = useRecoilState(lengthAtom);
+  const [includeChars, setIncludeChars] = useRecoilState(includeCharactersAtom);
+  const [excludeMistakableChars, setExcludeMistakableChars] = useRecoilState(
+    excludeMistakableCharactersAtom
+  );
+  const [charError, setCharError] = useRecoilState(charErrorAtom);
 
   const [password, setPassword] = useState('');
-  const handleClick = () => {
+  const handleGen = () => {
     const options: PasswordOptions = {
       length,
-      includeCharacters,
-      excludeMistakableCharacters,
+      includeCharacters: includeChars,
+      excludeMistakableCharacters: excludeMistakableChars,
     };
     const pass = createPassword(options);
     setPassword(pass);
   };
+
+  // 初回レンダリング時にパスワードを生成する
+  useEffect(() => {
+    handleGen();
+  }, []);
 
   const [copyButtonText, setCopyButtonText] = useState('COPY');
   const handleCopy = () => {
@@ -36,19 +43,31 @@ export default function GenButton() {
     });
   };
 
-  // 初回レンダリング時にパスワードを生成する
-  useEffect(() => {
-    handleClick();
-  }, []);
+  const resetLength = useResetRecoilState(lengthAtom);
+  const resetIncludeChars = useResetRecoilState(includeCharactersAtom);
+  const resetExcludeMistakableChars = useResetRecoilState(
+    excludeMistakableCharactersAtom
+  );
+  const resetCharError = useResetRecoilState(charErrorAtom);
+  const handleReset = () => {
+    resetLength();
+    resetIncludeChars();
+    resetExcludeMistakableChars();
+    resetCharError();
+    handleGen();
+  };
 
   const hasError = charError || length <= 0;
   return (
     <>
-      <Button variant="outlined" onClick={handleClick} disabled={hasError}>
+      <Button variant="outlined" onClick={handleGen} disabled={hasError}>
         GENERATE
       </Button>
       <Button variant="outlined" onClick={handleCopy}>
         {copyButtonText}
+      </Button>
+      <Button variant="contained" onClick={handleReset} color="error" sx={{ ml: 2 }}>
+        RESET
       </Button>
       <div>
         <Input
