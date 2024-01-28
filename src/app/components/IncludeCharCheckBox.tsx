@@ -31,7 +31,7 @@ export default function IncludeCharCheckBox() {
 
   return (
     <>
-      <Box display="flex">
+      <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }}>
         <FormControl required error={charError} variant="standard">
           <FormLabel>使用する文字種</FormLabel>
           <FormGroup>
