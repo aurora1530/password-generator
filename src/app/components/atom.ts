@@ -22,5 +22,5 @@ export const includeCharactersAtom = atom({
 
 export const excludeMistakableCharactersAtom = atom({
   key: 'excludeMistakableCharacters',
-  default: false,
+  default: true,
 });

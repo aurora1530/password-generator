@@ -26,6 +26,10 @@ export default function GenButton() {
     setPassword(pass);
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(password);
+  };
+
   // 初回レンダリング時にパスワードを生成する
   useEffect(() => {
     handleClick();
@@ -37,7 +41,15 @@ export default function GenButton() {
       <Button variant="outlined" onClick={handleClick} disabled={hasError}>
         GENERATE
       </Button>
-      <Input value={password} color="primary" readOnly />
+      <Input
+        value={password}
+        color="primary"
+        readOnly
+        inputProps={{ style: { textAlign: 'center' } }}
+      />
+      <Button variant="outlined" onClick={handleCopy}>
+        COPY
+      </Button>
     </>
   );
 }
