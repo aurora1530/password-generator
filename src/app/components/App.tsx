@@ -6,7 +6,7 @@ import GenButton from './GenButton';
 import { RecoilRoot } from 'recoil';
 import LengthInput from './LengthInput';
 import ExcludeCharCheckBox from './ExcludeCharCheckBox';
-import OptionsCard from './OptionCard';
+import OutlinedCard from './OutlinedCard';
 import theme from '../theme';
 
 export default function App() {
@@ -16,18 +16,18 @@ export default function App() {
         <CssBaseline />
         <RecoilRoot>
           <Box>
-            <OptionsCard>
+            <OutlinedCard>
               <GenButton />
-            </OptionsCard>
-            <OptionsCard>
+            </OutlinedCard>
+            <OutlinedCard>
               <IncludeCharCheckBox />
-            </OptionsCard>
-            <OptionsCard>
+            </OutlinedCard>
+            <OutlinedCard>
               <LengthInput />
-            </OptionsCard>
-            <OptionsCard>
+            </OutlinedCard>
+            <OutlinedCard>
               <ExcludeCharCheckBox />
-            </OptionsCard>
+            </OutlinedCard>
           </Box>
         </RecoilRoot>
       </ThemeProvider>
