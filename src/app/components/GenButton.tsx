@@ -24,6 +24,7 @@ export default function GenButton() {
       includeCharacters: includeChars,
       excludeMistakableCharacters: excludeMistakableChars,
     };
+    console.log(options);
     const pass = createPassword(options);
     setPassword(pass);
   };
@@ -49,12 +50,21 @@ export default function GenButton() {
     excludeMistakableCharactersAtom
   );
   const resetCharError = useResetRecoilState(charErrorAtom);
+  const [resetTrigger, setResetTrigger] = useState(false);
+  useEffect(() => {
+    if (resetTrigger) {
+      setResetTrigger(false);
+      handleGen();
+    }
+  }, [resetTrigger]);
+
   const handleReset = () => {
     resetLength();
     resetIncludeChars();
     resetExcludeMistakableChars();
     resetCharError();
-    handleGen();
+
+    setResetTrigger((resetTrigger) => !resetTrigger);
   };
 
   const hasError = charError || length <= 0;
