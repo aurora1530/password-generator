@@ -24,7 +24,6 @@ export default function GenButton() {
       includeCharacters: includeChars,
       excludeMistakableCharacters: excludeMistakableChars,
     };
-    console.log(options);
     const pass = createPassword(options);
     setPassword(pass);
   };
