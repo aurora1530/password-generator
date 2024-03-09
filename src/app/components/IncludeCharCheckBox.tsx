@@ -9,16 +9,30 @@ import {
   TextareaAutosize,
 } from '@mui/material';
 import { useRecoilState } from 'recoil';
-import { charErrorAtom, includeCharactersAtom } from './atom';
-import { defaultCharacters } from 'password-generator';
+import {
+  charErrorAtom,
+  includeCharactersAtom,
+  excludeMistakableCharactersAtom,
+} from './atom';
+import { defaultCharacters, mistakableCharacters } from 'password-generator';
 
 export default function IncludeCharCheckBox() {
   const [includeCharacters, setIncludeCharacters] = useRecoilState(includeCharactersAtom);
+  const [excludeMistakableChars, setExcludeMistakableChars] = useRecoilState(
+    excludeMistakableCharactersAtom
+  );
   const [charError, setCharError] = useRecoilState(charErrorAtom);
   const { lowercase, uppercase, number, symbol } = includeCharacters;
   const targetChars = Object.entries(includeCharacters)
     .filter(([, value]) => value)
-    .map(([key]) => defaultCharacters[key as keyof typeof defaultCharacters]);
+    .map(([key]) => defaultCharacters[key as keyof typeof defaultCharacters])
+    .join('')
+    .split('')
+    .filter(
+      (c) =>
+        !excludeMistakableChars ||
+        !Object.values(mistakableCharacters).join('').includes(c)
+    );
 
   const handleCharChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCharacters = {
@@ -77,7 +91,7 @@ export default function IncludeCharCheckBox() {
           <FormLabel>使用する文字</FormLabel>
           <br />
           <TextareaAutosize
-            value={targetChars.join('\n')}
+            value={targetChars.join('')}
             readOnly
             style={{
               border: '1px solid #000',
