@@ -13,6 +13,7 @@ import {
   charErrorAtom,
   includeCharactersAtom,
   excludeMistakableCharactersAtom,
+  lengthAtom,
 } from './atom';
 import { defaultCharacters, mistakableCharacters } from 'password-generator';
 
@@ -21,6 +22,7 @@ export default function IncludeCharCheckBox() {
   const [excludeMistakableChars, setExcludeMistakableChars] = useRecoilState(
     excludeMistakableCharactersAtom
   );
+  const [length, setLength] = useRecoilState(lengthAtom);
   const [charError, setCharError] = useRecoilState(charErrorAtom);
   const { lowercase, uppercase, number, symbol } = includeCharacters;
   const targetChars = Object.entries(includeCharacters)
@@ -41,6 +43,9 @@ export default function IncludeCharCheckBox() {
     };
     setIncludeCharacters((chars) => (chars = newCharacters));
     setCharError(() => Object.values(newCharacters).filter(Boolean).length === 0);
+
+    const includeCharsNum = Object.values(newCharacters).filter(Boolean).length;
+    if (length < includeCharsNum) setLength(includeCharsNum);
   };
 
   return (

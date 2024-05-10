@@ -1,16 +1,19 @@
 import { Box, Button, FormControl, FormLabel, Input } from '@mui/material';
 import { useRecoilState } from 'recoil';
-import { lengthAtom } from './atom';
+import { lengthAtom, includeCharactersAtom } from './atom';
 import { Add, Remove } from '@mui/icons-material';
 export default function LengthInput() {
   const [length, setLength] = useRecoilState(lengthAtom);
+  const [includeCharacters, setIncludeCharacters] = useRecoilState(includeCharactersAtom);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLength(Number(event.target.value));
   };
   const handleAdd = () => setLength((pre) => pre + 1);
   const handleRemove = () =>
     setLength((pre) => {
-      if (pre > 1) return pre - 1;
+      const includeCharsNum = Object.values(includeCharacters).filter(Boolean).length;
+
+      if (pre > 1 && pre > includeCharsNum) return pre - 1;
       return pre;
     });
   return (
